@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /*
 Programa 2: Programa para medir el tiempo de: 
@@ -38,19 +39,19 @@ public class RunSpin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		List<Future<Integer>> futures = new ArrayList<Future<Integer>>();
-		int numberThreads = 4;
+		int numberThreads = 1;
 		ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
 //		CounterAtomic counter = new CounterAtomic(); // Descomentar para probar el contador atomico
-		Lock lock = new TASLock();
+//		Lock lock = new TASLock();
 //		Lock lock = new TTASLock();
 //		Lock lock = new BackoffLock();
 //		Lock lock = new MCSLock();
 //		Lock lock = new ALock(numberThreads);
-//		Lock lock = new ReentrantLock();
+		Lock lock = new ReentrantLock();
 //		Lock lock = new CLHLock();
 		
 		long startTime = System.nanoTime();//Start time
-		for(int i = 0; i < 400; i++) {
+		for(int i = 0; i < 1000; i++) {
 			futures.add(executor.submit(() -> task(lock))); 
 //			futures.add(executor.submit(() -> counter.increment())); // Descomentar para probar el contador atomico
 		}
